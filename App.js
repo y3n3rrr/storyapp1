@@ -24,7 +24,6 @@ export default class App extends Component {
   }
 
   nextPage= () => {
-    alert("GO NEXT PAGE")
     let num = this.state.pageNum+1;
     this.setState({
       pageNum: num
@@ -32,7 +31,6 @@ export default class App extends Component {
   }
 
   prevPage= () => {
-    alert("GO PREVIOUS PAGE")
     let num = this.state.pageNum-1;
     this.setState({
       pageNum: num
@@ -40,22 +38,25 @@ export default class App extends Component {
   }
 
   render() {
-    alert("Main Component Render")
-    if(this.state.pageNum == 1){
-      return (
-        <View style={styles.container}>
-         <Page1 nextPage={this.nextPage} />
-        </View>
-      );
+    
+    switch(this.state.pageNum){
+      case 1:
+      return <View style={styles.container}>
+        <Page1 nextPage={this.nextPage} />
+       </View>
+      
+      break;
+      case 2:
+      return <View style={styles.container}>
+      <Page2 nextPage={this.nextPage} prevPage={this.prevPage}/>
+     </View>
+      break;
+      default:
+      return <View style={styles.container}rr>
+        <Text>404 Not Found!!!</Text>
+      </View>
+      break;
     }
-    if(this.state.pageNum == 2){
-      return (
-        <View style={styles.container}>
-         <Page2 nextPage={this.nextPage} prevPage={this.prevPage}/>
-        </View>
-      );
-    }
-   
   }
 }
 

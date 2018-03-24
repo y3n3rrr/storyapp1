@@ -4,7 +4,6 @@ import { Text, View, ImageBackground, StyleSheet, TouchableOpacity,TouchableHigh
 class Page2 extends Component {
     constructor(props) {
         super(props)
-        alert("PAGE!!! : pagenum:")
     }
     onPressLearnMore = () => {
     }
