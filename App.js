@@ -44,7 +44,6 @@ export default class App extends Component {
       return <View style={styles.container}>
         <Page1 nextPage={this.nextPage} />
        </View>
-      
       break;
       case 2:
       return <View style={styles.container}>

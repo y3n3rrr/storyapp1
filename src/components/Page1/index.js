@@ -16,7 +16,7 @@ class Page1 extends Component {
                 <Image
                         source={require('../../assets/1sayfa/1sayfa_resim/home.png')}
                     />
-</TouchableOpacity>
+            </TouchableOpacity>
                     
                 </View>
                 <View style={{ justifyContent: 'space-around', marginRight:50, flexDirection:'row' }}>

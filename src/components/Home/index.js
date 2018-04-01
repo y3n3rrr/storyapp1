@@ -19,6 +19,7 @@ class HomePage extends Component {
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'cover' }} source={require('../../assets/1sayfa/1sayfa_resim/birinciSayfa.png')}>
                 <View style={{ margin:10}}>
+                
                 <TouchableOpacity onPress={() => this.onPressLearnMore()}>
                 <Image
                         source={require('../../assets/1sayfa/1sayfa_resim/home.png')}
