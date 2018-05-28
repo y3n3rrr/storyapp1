@@ -5,7 +5,6 @@ import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TouchableHig
     BackHandler, Animated, Dimensions } from 'react-native'
 import Sound from 'react-native-sound';
 
-import Modal from "react-native-modal";
 export class locationInfo {
     width;
     height;

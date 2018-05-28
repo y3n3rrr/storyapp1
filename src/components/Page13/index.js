@@ -39,19 +39,6 @@ class Page13 extends Component {
                         <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1 }}>
-        <TouchableOpacity onPress={this._toggleModal}>
-          <Text>Show Modal</Text>
-        </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisible}>
-          <View style={{ flex: 1 }}>
-            <Text>Hello!</Text>
-            <TouchableOpacity onPress={this._toggleModal}>
-              <Text>Hide me!</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      </View>
                 
                 <View style={styles.pofu}>
                 <View style={{position:'absolute', marginLeft:30}}>
