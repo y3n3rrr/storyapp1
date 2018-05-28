@@ -35,16 +35,25 @@ setModalVisible(visible) {
                         <Image source={require('../../assets/12SayfaResim/sahne1/canta_ilk.png')} />
                     </TouchableOpacity>
                 </View>
-                <Modal visible={this.state.modalVisible}>
-                <View style={styles.ModalStyle}>
-                    <Text>YOU SEE ModsAL!</Text>
-                </View>
-                <View>
+             
+                <Modal transparent={true}
+       visible={this.state.modalVisible}
+       onRequestClose={this.closeModal}>
+  <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          backgroundColor:"#00000080",
+          justifyContent: 'center',
+          alignItems: 'center'}}>
+    <View style={{
+            width: 300,
+            height: 300,backgroundColor: '#fff', padding: 20}}>
                         <TouchableOpacity onPress={()=> this.setModalVisible(!this.state.modalVisible)}> 
                         <Text>Close Modal </Text>
                         </TouchableOpacity>
-                </View>
-                </Modal>
+    </View>
+  </View>
+</Modal>
                  <View style={styles.buttonContainer}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
                         <TouchableOpacity onPress={this.props.prevPage}>
@@ -77,7 +86,10 @@ const styles = StyleSheet.create({
     ModalStyle:{
         backgroundColor:'#aaa',
         height:150,
+        width:150,
         justifyContent:'center',
+        backgroundColor:'transparent',
+
         alignItems:'center'
     }
 })
