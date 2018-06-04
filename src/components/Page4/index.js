@@ -19,7 +19,6 @@ class Page4 extends Component {
         this.windAudio.stop();
     }
     render() {
-       
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/4sayfa/4sayfa.png')}>
                 <View style={{ margin:10}}>

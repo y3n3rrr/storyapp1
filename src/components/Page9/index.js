@@ -96,6 +96,7 @@ class Page9 extends Component {
             showSolTabure : true
           });
     }
+    
     showMasa = ()=>{
         this.setState({
             showMasa : true

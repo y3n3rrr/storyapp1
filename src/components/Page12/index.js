@@ -4,21 +4,51 @@ import { Modal, Text, View, ImageBackground, StyleSheet, TouchableOpacity, Touch
     Alert,
     BackHandler, Animated, Dimensions } from 'react-native'
 
-import Sound from 'react-native-sound';
+import CantaModal from './CantaModal';
+import Tool from './tool';
+
+export class locationInfo {
+    width;
+    height;
+    fx;
+    fy;
+    px;
+    py;
+  }
 
 
-  
+
 class Page12 extends Component{
 constructor(props) {
     super(props)
     this.state = {
+        showCekicGif:false,
         modalVisible: false,
+        selectedTool:0,
+        dropAreaValuesCit: new locationInfo,
     };
 }
+
+setdropAreaValuesCit(event){
+    this.refs.cit.measure( (fx, fy, width, height, px, py) => {
+      this.setState({
+        dropAreaValuesCit : {width, height,fx,fy,px,py}
+      });
+  })
+}
+    setSelectedTool=(tool)=>{
+        if(tool != 2){
+            this.setState({showCekicGif:true})
+        }else{
+            this.setState({selectedTool:tool})
+        this.setModalVisible(false)
+        }
         
-setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
+    }
+        
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
     render() {
         return (
             <View style={styles.container} >
@@ -28,33 +58,21 @@ setModalVisible(visible) {
                         <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                     </TouchableOpacity>
                 </View>
-                <View style={{flex:2}}>
+                <View style={{flex:2}}> 
                 </View>
                 <View style={{flex:7, alignItems:'center'}}>
                     <TouchableOpacity onPress={()=>this.setModalVisible(true)}>
                         <Image source={require('../../assets/12SayfaResim/sahne1/canta_ilk.png')} />
                     </TouchableOpacity>
                 </View>
-             
-                <Modal transparent={true}
-       visible={this.state.modalVisible}
-       onRequestClose={this.closeModal}>
-  <View style={{
-          flex: 1,
-          flexDirection: 'column',
-          backgroundColor:"#00000080",
-          justifyContent: 'center',
-          alignItems: 'center'}}>
-    <View style={{
-            width: 300,
-            height: 300,backgroundColor: '#fff', padding: 20}}>
-                        <TouchableOpacity onPress={()=> this.setModalVisible(!this.state.modalVisible)}> 
-                        <Text>Close Modal </Text>
-                        </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
-                 <View style={styles.buttonContainer}>
+                <View style={styles.brokenCitStyle} onLayout={(e)=>this.setdropAreaValuesCit(e)} ref="cit">
+                </View>
+                <View style={styles.toolContainer}>
+                    <Tool selectedTool={this.state.selectedTool} dropAreaValues={this.state.dropAreaValuesCit} />
+                </View>
+                
+                <CantaModal showCekicGif={this.state.showCekicGif} setSelectedTool={this.setSelectedTool} setModalVisible={this.setModalVisible.bind(this)} modalVisible={this.state.modalVisible} />
+                <View style={styles.buttonContainer}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
                         <TouchableOpacity onPress={this.props.prevPage}>
                             <Image source={require('../../assets/1sayfa/1sayfa_resim/geri.png')}/>
@@ -83,14 +101,21 @@ const styles = StyleSheet.create({
         bottom: 10,
         flexDirection: 'row'
     },
-    ModalStyle:{
-        backgroundColor:'#aaa',
-        height:150,
-        width:150,
+    toolContainer:{
+        position: 'relative',
+        flex: 9,
+        bottom:15,
+        marginRight:130,
+    },
+    brokenCitStyle:{
+        backgroundColor:'blue',
         justifyContent:'center',
-        backgroundColor:'transparent',
-
-        alignItems:'center'
+        justifyContent:'center',
+        width:200,
+        position:'absolute',
+        marginLeft:Dimensions.get('window').width / 2,
+        bottom:Dimensions.get('window').height / 3 - 30,
+        height:200
     }
 })
 //make this component available to the app
