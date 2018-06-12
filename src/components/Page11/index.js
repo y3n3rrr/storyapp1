@@ -25,15 +25,27 @@ class Page11 extends Component {
             opacity: new Animated.Value(5),
             tabureSagImageUrl:require('../../assets/11SayfaResim/tabure_tek.png')
         };
+        this.pageAudio = new Sound('sayfa11_giris.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
+        this.pageAudioCikis = new Sound('sayfa11_cikis.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } 
+        });
+    }
+
+    componentWillUnmount(){
+        this.pageAudio.stop()
+        this.pageAudioCikis.play()
     }
     onPressLearnMore = () => {
     }
-    // componentWillUpdate(nextProps, nextState){
-       
-    // }
 
-    componentDidMount(){
-    }
 
     setDropZoneValues(event){
         this.refs.mycomponent.measure( (fx, fy, width, height, px, py) => {

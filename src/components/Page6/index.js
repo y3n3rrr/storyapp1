@@ -15,12 +15,20 @@ class Page6 extends Component {
                 } 
             });
         });
+        this.pageAudio = new Sound('sayfa6.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
     }
     onPressLearnMore = () => {
     }
     componentWillUnmount(){
         this.fireAudio.stop();
         this.windAudio.stop();
+        this.pageAudio.stop()
     }
     onPressTabure = ()=>{
         this.fireAudio.play(); // have to put the call to play() in the onload callback

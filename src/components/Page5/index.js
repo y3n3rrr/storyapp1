@@ -8,7 +8,19 @@ class Page5 extends Component {
         this.state={
             isDoorOpen:true
         }
+        this.pageAudio = new Sound('sayfa5.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
     }
+    
+    componentWillUnmount(){
+        this.pageAudio.stop()
+    }
+
     onPressLearnMore = () => {
     }
     onPressDoor = ()=>{

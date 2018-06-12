@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity,TouchableHighlight, Button, Image, Animated, Dimensions } from 'react-native'
+import Sound from 'react-native-sound';
 
 class Page2 extends Component {
     constructor(props) {
@@ -8,8 +9,23 @@ class Page2 extends Component {
             moveAnim: new Animated.ValueXY(),
             pofuImage:require('../../assets/2sayfa/ikinciSayfa_resim/new_pofu.png'),
             showImage:true,
-            showPoguDongu:false
+            showPoguDongu:false,
+            agac_Karli_ilk:true,
+            yariAgacAni:false,
+            agac_kariDokulmus_ikinci:false,
+            agac_kariTamDokulmus_ucuncu:false
         }
+
+        this.pageAudio = new Sound('sayfa2.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
+    }
+    componentWillUnmount(){
+        this.pageAudio.stop()
     }
     onPressLearnMore = () => {
           this.setState({
@@ -44,8 +60,13 @@ class Page2 extends Component {
     componentDidMount(){
         this.onPressLearnMore();
     }
+    clickTree = (e)=>{
+        if(e==1){
+            
+        }
+    }
     render() {
-       
+        
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/2sayfa/ikinciSayfa.png')}>
                 <View style={{ margin:11}}>
@@ -54,6 +75,29 @@ class Page2 extends Component {
                         source={require('../../assets/1sayfa/1sayfa_resim/home.png')}
                     />
                 </TouchableOpacity>
+                <View style={{paddingTop:100, justifyContent:'space-between', paddingRight:50, flexDirection:'row'}}>
+                <TouchableOpacity onPress={()=>this.clickTree(1)}>
+                        <Image style={ !this.state.agac_Karli_ilk ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_Karli_ilk.png')}/>
+                        <Image style={ !this.state.yariAgacAni ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/yariAgacAni.gif')}/>
+                        <Image style={ !this.state.agac_kariDokulmus_ikinci ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_kariDokulmus_ikinci.png')}/>
+                        <Image style={ !this.state.agac_kariTamDokulmus_ucuncu ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_kariTamDokulmus_ucuncu.png')}/>
+                        
+                </TouchableOpacity>
+                <TouchableOpacity style={{right:100, top:10}} onPress={()=>this.clickTree(1)}>
+                        <Image style={ !this.state.agac_Karli_ilk ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_Karli_ilk.png')}/>
+                        <Image style={ !this.state.yariAgacAni ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/yariAgacAni.gif')}/>
+                        <Image style={ !this.state.agac_kariDokulmus_ikinci ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_kariDokulmus_ikinci.png')}/>
+                        <Image style={ !this.state.agac_kariTamDokulmus_ucuncu ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_kariTamDokulmus_ucuncu.png')}/>
+                        
+                </TouchableOpacity>
+                <TouchableOpacity style={{top:50, top:Dimensions.get('window').height/4}} onPress={()=>this.clickTree(1)}>
+                        <Image style={ !this.state.agac_Karli_ilk ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_Karli_ilk.png')}/>
+                        <Image style={ !this.state.yariAgacAni ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/yariAgacAni.gif')}/>
+                        <Image style={ !this.state.agac_kariDokulmus_ikinci ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_kariDokulmus_ikinci.png')}/>
+                        <Image style={ !this.state.agac_kariTamDokulmus_ucuncu ? { height: 0} : {}}  source={require('../../assets/2sayfa/ikinciSayfa_resim/agac_kariTamDokulmus_ucuncu.png')}/>
+                        
+                </TouchableOpacity>
+                </View>
                 </View>{
                     this.state.showImage && <Animated.Image 
                     resizeMethod="scale"

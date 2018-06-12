@@ -28,11 +28,13 @@ import Page11 from './src/components/Page11'
 import Page12 from './src/components/Page12'
 import Page13 from './src/components/Page13'
 import Page14 from './src/components/Page14'
+import Page15 from './src/components/Page15'
+import Page16 from './src/components/Page16'
 export default class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      pageNum:12
+      pageNum:15
     }
   }
 
@@ -124,6 +126,16 @@ export default class App extends Component {
       case 14:
       return <View style={styles.container}>
       <Page14 nextPage={this.nextPage} prevPage={this.prevPage}/>
+     </View>
+      break;
+      case 15:
+      return <View style={styles.container}>
+      <Page15 nextPage={this.nextPage} prevPage={this.prevPage}/>
+     </View>
+      break;
+      case 16:
+      return <View style={styles.container}>
+      <Page16 nextPage={this.nextPage} prevPage={this.prevPage}/>
      </View>
       break;
       default:

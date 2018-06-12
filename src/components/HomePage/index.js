@@ -1,14 +1,29 @@
 import React, { Component } from 'react'
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity,TouchableHighlight, Button, Image } from 'react-native'
+import Sound from 'react-native-sound';
 
 class HomePage extends Component {
     constructor(props) {
         super(props)
+     
+        this.pageAudio = new Sound('baslik.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
+    }
+    componentWillUnmount(){
+        this.pageAudio.stop()
     }
     onPressLearnMore = () => {
         alert("clicked!")
     }
-
+    componentDidMount(){
+        <Image source={require('../../assets/10SayfaResim/soru.gif')} />
+        this.setState({showKosiImage:false, showKosiGif:true,})
+    }
     handleRowPress=(item)=>{
         alert("start clicked!")
         this.props.navigation.navigate('DetailsScreen',item)

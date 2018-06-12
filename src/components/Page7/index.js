@@ -14,11 +14,19 @@ class Page7 extends Component {
             showKosiImage:true,
             showKosiGif:false,
         }
+        this.pageAudio = new Sound('sayfa7.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
     }
     onPressLearnMore = () => {
     }
     componentWillUnmount(){
-       
+        this.fireAudio.stop()
+        this.pageAudio.stop()
     }
     onPressKosi = ()=>{
         this.fireAudio.play();

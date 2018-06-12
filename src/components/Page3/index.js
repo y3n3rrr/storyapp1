@@ -20,11 +20,19 @@ class Page3 extends Component {
             }
         });
 
-          
+        this.pageAudio = new Sound('sayfa3.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
     }
+
     onPressLearnMore = () => {
     }
     componentWillUnmount(){
+        this.pageAudio.stop()
         this.windAudio.stop();
         this.fireAudio.stop();
     }

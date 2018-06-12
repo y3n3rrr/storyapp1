@@ -12,10 +12,20 @@ class Page4 extends Component {
                 this.windAudio.play(); // have to put the call to play() in the onload callback
             }
         });
+        
+        this.pageAudio = new Sound('sayfa4.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
     }
+
     onPressLearnMore = () => {
     }
     componentWillUnmount(){
+        this.pageAudio.stop()
         this.windAudio.stop();
     }
     render() {

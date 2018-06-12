@@ -12,6 +12,16 @@ class Page8 extends Component {
             masaUrl:require('../../assets/8sayfa/masa-ilk.png'),
             saksiUrl:require('../../assets/8sayfa/saksi-ilk.png'),
         };
+        this.pageAudio = new Sound('sayfa8.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
+    }
+    componentWillUnmount(){
+        this.pageAudio.stop()
     }
     onPressLearnMore = () => {
     }

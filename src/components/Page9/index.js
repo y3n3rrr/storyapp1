@@ -39,6 +39,16 @@ class Page9 extends Component {
             dropAreaValuesSiluetMasa: new locationInfo,
             opacity: new Animated.Value(5),
         };
+        this.pageAudio = new Sound('sayfa9.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
+    }
+    componentWillUnmount(){
+        this.pageAudio.stop()
     }
     onPressLearnMore = () => {
     }

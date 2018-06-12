@@ -16,11 +16,19 @@ class Page13 extends Component {
             isModalVisible: false
 
         }
+        this.pageAudio = new Sound('sayfa13.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+            } else {
+                this.pageAudio.play(); // have to put the call to play() in the onload callback
+            }
+        });
     }
     onPressLearnMore = () => {
     }
     componentWillUnmount(){
         this.kardeYurume.stop();
+        this.pageAudio.stop();
     }
     onPressPofu = () => {
         this.setState({showSoruGif: true})
