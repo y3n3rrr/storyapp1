@@ -5,17 +5,17 @@ import Sound from 'react-native-sound';
 class Page6 extends Component {
     constructor(props) {
         super(props)
-        this.fireAudio = new Sound('fire_audio.mp3', Sound.MAIN_BUNDLE, (error) => {
+        this.fireAudio = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
             } 
-            this.windAudio = new Sound('wind_audio.mp3', Sound.MAIN_BUNDLE, (error) => {
+            this.windAudio = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {
                 if (error) {
                     console.log('failed to load the sound', error);
                 } 
             });
         });
-        this.pageAudio = new Sound('sayfa6.mp3', Sound.MAIN_BUNDLE, (error) => {
+        this.pageAudio = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
             } else {
@@ -36,6 +36,10 @@ class Page6 extends Component {
     onPressAyakkabi = ()=>{
         this.windAudio.play(); // have to put the call to play() in the onload callback
     }
+    onPressCopKovasi = ()=>{
+        this.windAudio.play(); // have to put the call to play() in the onload callback
+    }
+    
     render() {
        
         return (

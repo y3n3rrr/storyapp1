@@ -55,7 +55,7 @@ class Page9 extends Component {
     componentDidMount(){
         setTimeout(()=>{
             this.setState({ showBg2:true, showDraggable:true });
-        },1000)
+        },5000)
     }
 
     setDropZoneValues(event){

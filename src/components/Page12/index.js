@@ -63,6 +63,9 @@ constructor(props) {
     this.pageAudio2 = new Sound('sayfa12_2_takimcanta.mp3', Sound.MAIN_BUNDLE, (error) => {});
     this.pageAudio3 = new Sound('sayfa12_3_aracsecimi.mp3', Sound.MAIN_BUNDLE, (error) => {});
     this.pageAudio4 = new Sound('sayfa12_4_tamiretme.mp3', Sound.MAIN_BUNDLE, (error) => {});
+    this.yanlisSound = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {});
+    this.citCak1 = new Sound('sayfa12_cekic_3tak1', Sound.MAIN_BUNDLE, (error) => {});
+    this.citCak2 = new Sound('sayfa12_cekic_3tak2', Sound.MAIN_BUNDLE, (error) => {});
 
     
     this._mounted= true;
@@ -100,7 +103,9 @@ setdropAreaValuesCit2(event){
   })
 }
     setSelectedTool=(tool)=>{
+        this._mounted = false
         if(tool != 2){
+            this.yanlisSound.play();
             this.setState({showCekicGif:true})
         }else{
             this.setState({selectedTool:tool, showSahne3:true})
@@ -112,6 +117,9 @@ setdropAreaValuesCit2(event){
 }
         
     setModalVisible(visible) {
+        this._mounted = false
+        this.pageAudio.stop();
+        this.pageAudio2.stop();
         if(visible){
             this.pageAudio3.play();
         }
@@ -125,9 +133,11 @@ setdropAreaValuesCit2(event){
         }, 4000)
     }
     onPressSolCit = ()=>{
+        this.citCak1.play()
         this.setState({showSolCitGif:false, showSolCitSiluet:true, showSolDikCit:true, showTool:false})
     }
     onPressSagCit = ()=>{
+        this.citCak1.play()
         this.setState({showSagCitSiluet:true, showSagDikCit:true, showTool:false})
     }
 
@@ -141,8 +151,7 @@ setdropAreaValuesCit2(event){
     }
     
     onPressDikCit= (e) =>{
-        this.citAudio.stop(); // have to put the call to play() in the onload callback
-        this.citAudio.play(); // have to put the call to play() in the onload callback
+        this.citCak2.play();
         if(e == 1){
             this.setState({showSolCitSiluet:false, solCitMargin:Dimensions.get('window').width / 2 + 45, solCitBottom:Dimensions.get('window').height / 3 + 15})
         }else{

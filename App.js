@@ -34,7 +34,7 @@ export default class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      pageNum:15
+      pageNum:0
     }
   }
 
