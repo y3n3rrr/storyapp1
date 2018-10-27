@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TouchableHighlight, Button, Image, Animated, Dimensions } from 'react-native'
 import Sound from 'react-native-sound';
-
+import Footer from '../Components/Footer';
 
 class Page14 extends Component {
     constructor(props) {
@@ -22,11 +22,12 @@ class Page14 extends Component {
             }
         });
     }
-    onPressLearnMore = () => {
+    goToHomePage = () => {
+        this.props.setPageNum(0)
     }
     componentWillUnmount(){
-        this.pageAudio.stop();
-        this.kardeYurume.stop();
+        this.pageAudio.release();
+        this.kardeYurume.release();
     }
     onPressPofu = () => {
         this.setState({showSoruGif: true})
@@ -40,22 +41,11 @@ class Page14 extends Component {
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/14SayfaResim/14sayfa_taslak.png')}>
                 <View style={{ margin: 10 }}>
-                    <TouchableOpacity onPress={() => this.onPressLearnMore()}>
+                    <TouchableOpacity onPress={() => this.goToHomePage()}>
                         <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                     </TouchableOpacity>
                 </View>
-                <View style={styles.buttonContainer}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.prevPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/geri.png')} />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 0, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.nextPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/ileri.png')} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <Footer Score = {this.props.Score} setPageNum={this.props.setPageNum} currentPage={this.props.currentPage} />
             </ImageBackground>
         )
     }

@@ -1,67 +1,67 @@
 import React, { Component } from 'react'
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity,TouchableHighlight, Button, Image, Animated, Dimensions } from 'react-native'
 import Sound from 'react-native-sound';
+import Footer from '../Components/Footer';
 
 class Page3 extends Component {
     constructor(props) {
         super(props)
-        this.windAudio = new Sound('wind_audio.mp3', Sound.MAIN_BUNDLE, (error) => {
+        this.state={
+            showBg:false
+        }
+        this.windAudio = new Sound('ruzgar.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
             } else {
                 this.windAudio.play(); // have to put the call to play() in the onload callback
             }
         });
-          this.fireAudio = new Sound('fire_audio.mp3', Sound.MAIN_BUNDLE, (error) => {
+          this.fireAudio = new Sound('ates.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
             } else {
                 this.fireAudio.play(); // have to put the call to play() in the onload callback
             }
         });
-
-        this.pageAudio = new Sound('sayfa3.mp3', Sound.MAIN_BUNDLE, (error) => {
+        this.pageAudio2 = new Sound('s3p2.mp3', Sound.MAIN_BUNDLE, (error) => {});
+        this.pageAudio = new Sound('s3p1.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
             } else {
-                this.pageAudio.play(); // have to put the call to play() in the onload callback
+                this.pageAudio.play(()=>{
+                    this.pageAudio2.play();
+                    this.setState({showBg:true})
+                }); // have to put the call to play() in the onload callback
             }
         });
+        
     }
 
-    onPressLearnMore = () => {
+    goToHomePage = () => {
+        this.props.setPageNum(0)
     }
     componentWillUnmount(){
-        this.pageAudio.stop()
-        this.windAudio.stop();
-        this.fireAudio.stop();
+        this.pageAudio.release()
+        this.pageAudio2.release()
+        this.windAudio.release();
+        this.fireAudio.release();
     }
     render() {
        
         return (
-            <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/3sayfa/3sayfa.png')}>
+            <View style={styles.container}>
+                <ImageBackground style={ this.state.showBg ? { height:0} : styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/3sayfa/3sayfa_uyuma.png')}>
+                </ImageBackground>
+                <ImageBackground style={!this.state.showBg ?  { height:0} : styles.container } imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/3sayfa/3sayfa_uyanmis.png')}>
                 <View style={{ margin:10}}>
-                <TouchableOpacity onPress={() => this.onPressLearnMore()}>
-                <Image
-                        source={require('../../assets/1sayfa/1sayfa_resim/home.png')}
-                    />
+                <TouchableOpacity onPress={() => this.goToHomePage()}>
+                    <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                 </TouchableOpacity>
                 </View>
              
-                <View style={styles.buttonContainer}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <TouchableOpacity onPress={this.props.prevPage}><Image
-                            source={require('../../assets/1sayfa/1sayfa_resim/geri.png')}
-                        /></TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 0, flexDirection: 'row' }}>
-                    <TouchableOpacity onPress={this.props.nextPage}>
-                        <Image 
-                            source={require('../../assets/1sayfa/1sayfa_resim/ileri.png')}
-                        /></TouchableOpacity>
-                    </View>
-                </View>
+                <Footer Score = {this.props.Score} setPageNum={this.props.setPageNum} currentPage={this.props.currentPage} />
             </ImageBackground>
+            </View>
         )
     }
 }

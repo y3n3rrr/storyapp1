@@ -5,7 +5,8 @@ import Sound from 'react-native-sound';
 class HomePage extends Component {
     constructor(props) {
         super(props)
-     
+        //bensound-littleidea baslik
+
         this.pageAudio = new Sound('baslik.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
@@ -14,8 +15,9 @@ class HomePage extends Component {
             }
         });
     }
+    
     componentWillUnmount(){
-        this.pageAudio.stop()
+        this.pageAudio.release();
     }
     onPressLearnMore = () => {
         alert("clicked!")
@@ -29,6 +31,11 @@ class HomePage extends Component {
         this.props.navigation.navigate('DetailsScreen',item)
     }
 
+    foo=(_isreadme)=>{
+        this.props.setPageNum(1)
+        this.props.setReadMe(_isreadme)
+    }
+
     render() {
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/kapak/kapaksayfa_butonsuz.png')}>
@@ -36,13 +43,13 @@ class HomePage extends Component {
                  </View>
                 <View style={{ flex:6}}>
                 <View style={{ top:10}}>
-                <TouchableOpacity onPress={this.props.banaOku}>
+                <TouchableOpacity onPress={()=> this.foo(false)}>
                     <Image source={require('../../assets/kapak/banaoku.png')} style={{ marginLeft:100 }} />
                 </TouchableOpacity>
                     
                 </View>
                 <View style={{ bottom:30}}>
-                <TouchableOpacity onPress={this.props.banaOku}>
+                <TouchableOpacity onPress={()=>this.foo(true)}>
                     <Image source={require('../../assets/kapak/benioku.png')} style={{ marginLeft:100 }} />
                 </TouchableOpacity>
                 </View>

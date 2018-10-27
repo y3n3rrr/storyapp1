@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View
@@ -34,108 +33,109 @@ export default class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      pageNum:0
+      currentPage:0,
+      IsReadMe:true,
+      Score:0
+    }
+  }
+  setPageNum = (_pagenum) => {
+    if(_pagenum  >= 0 && _pagenum <= 16){
+      this.setState({ currentPage: _pagenum })
     }
   }
 
-  nextPage= () => {
-    let num = this.state.pageNum+1;
-    this.setState({
-      pageNum: num
-    })
+  setReadMe = (_isreadme) => {
+    this.setState({ IsReadMe: _isreadme })
   }
 
-  prevPage= () => {
-    let num = this.state.pageNum-1;
-    this.setState({
-      pageNum: num
-    })
+  
+  addScore = (_points) => {
+    let cp = this.state.Score + _points;
+    this.setState({ Score: cp })
   }
+
 
   render() {
-    
-    switch(this.state.pageNum){
+    switch(this.state.currentPage){
       case 0:
       return <View style={styles.container}>
-        <HomePage banaOku={this.nextPage} />
+        <HomePage setPageNum ={this.setPageNum} setReadMe ={this.setReadMe} />
        </View>
-      break;
       case 1:
       return <View style={styles.container}>
-        <Page1 nextPage={this.nextPage} />
+        <Page1 addScore={this.addScore} Score = {this.state.Score} {...this.state} setPageNum ={this.setPageNum} />
        </View>
-      break;
       case 2:
-      return <Page2 nextPage={this.nextPage} prevPage={this.prevPage}/>
-      break;
+      return <View style={styles.container}>
+      <Page2 addScore = {this.addScore} Score = {this.state.Score} {...this.state} setPageNum ={this.setPageNum}/>
+     </View>
       case 3:
       return <View style={styles.container}>
-      <Page3 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page3 Score = {this.state.Score} {...this.state} setPageNum ={this.setPageNum} />
      </View>
-      break;
       case 4:
       return <View style={styles.container}>
-      <Page4 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page4 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum} />
      </View>
       break;
       case 5:
       return <View style={styles.container}>
-      <Page5 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page5 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum} />
      </View>
       break;
       case 6:
       return <View style={styles.container}>
-      <Page6 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page6 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 7:
       return <View style={styles.container}>
-      <Page7 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page7 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 8:
       return <View style={styles.container}>
-      <Page8 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page8 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 9:
       return <View style={styles.container}>
-      <Page9 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page9 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 10:
       return <View style={styles.container}>
-      <Page10 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page10 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 11:
       return <View style={styles.container}>
-      <Page11 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page11 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 12:
       return <View style={styles.container}>
-      <Page12 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page12 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 13:
       return <View style={styles.container}>
-      <Page13 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page13 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 14:
       return <View style={styles.container}>
-      <Page14 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page14 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 15:
       return <View style={styles.container}>
-      <Page15 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page15 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       case 16:
       return <View style={styles.container}>
-      <Page16 nextPage={this.nextPage} prevPage={this.prevPage}/>
+      <Page16 Score = {this.state.Score} currentPage = {this.state.pageNum} setPageNum ={this.setPageNum}/>
      </View>
       break;
       default:

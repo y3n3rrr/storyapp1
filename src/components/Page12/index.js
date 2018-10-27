@@ -7,7 +7,7 @@ import { Modal, Text, View, ImageBackground, StyleSheet, TouchableOpacity, Touch
 import CantaModal from './CantaModal';
 import Tool from './tool';
 import Sound from 'react-native-sound';
-
+import Footer from '../Components/Footer';
 
 export class locationInfo {
     width;
@@ -80,13 +80,18 @@ constructor(props) {
         }
     },5000)
 }
+
+goToHomePage = () => {
+    this.props.setPageNum(0)
+}
+
 componentWillUnmount(){
     this._mounted=false;
-    this.citAudio.stop();
-    this.pageAudio.stop();
-    this.pageAudio2.stop();
-    this.pageAudio3.stop();
-    this.pageAudio4.stop();
+    this.citAudio.release();
+    this.pageAudio.release();
+    this.pageAudio2.release();
+    this.pageAudio3.release();
+    this.pageAudio4.release();
 }
 setdropAreaValuesCit1(event){
     this.refs.cit1.measure( (fx, fy, width, height, px, py) => {
@@ -165,7 +170,7 @@ setdropAreaValuesCit2(event){
                 <View style={styles.container} >
                     <ImageBackground style={ styles.container}  imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/12SayfaResim/sahne1/12sayfa_taslak.png')}>
                     <View style={{ margin:10}}>
-                        <TouchableOpacity onPress={() => this.onPressLearnMore()}>
+                        <TouchableOpacity onPress={() => this.goToHomePage()}>
                             <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                         </TouchableOpacity>
                     </View>
@@ -186,18 +191,7 @@ setdropAreaValuesCit2(event){
                     </View>
                     
                     <CantaModal showCekicGif={this.state.showCekicGif} setSelectedTool={this.setSelectedTool} setModalVisible={this.setModalVisible.bind(this)} modalVisible={this.state.modalVisible} />
-                    <View style={styles.buttonContainer}>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={this.props.prevPage}>
-                                <Image source={require('../../assets/1sayfa/1sayfa_resim/geri.png')}/>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 0, flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={this.props.nextPage}>
-                                <Image source={require('../../assets/1sayfa/1sayfa_resim/ileri.png')}/>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    <Footer Score = {this.props.Score} setPageNum={this.props.setPageNum} currentPage={this.props.currentPage} />
                     </ImageBackground>
                 </View>
             )
@@ -208,7 +202,7 @@ setdropAreaValuesCit2(event){
                 <View style={styles.container} >
                     <ImageBackground style={ styles.container}  imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/12SayfaResim/sahne3/12sayfa_3sahne_taslak.png')}>
                     <View style={{ margin:10}}>
-                        <TouchableOpacity onPress={() => this.onPressLearnMore()}>
+                        <TouchableOpacity onPress={() => this.goToHomePage()}>
                             <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                         </TouchableOpacity>
                     </View>

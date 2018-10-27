@@ -1,21 +1,17 @@
 import React, { Component } from 'react'
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity,TouchableHighlight, Button, Image, Animated, Dimensions } from 'react-native'
 import Sound from 'react-native-sound';
+import Footer from '../Components/Footer';
 
 class Page6 extends Component {
     constructor(props) {
         super(props)
-        this.fireAudio = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {
-            if (error) {
-                console.log('failed to load the sound', error);
-            } 
-            this.windAudio = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {
-                if (error) {
-                    console.log('failed to load the sound', error);
-                } 
-            });
-        });
-        this.pageAudio = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {
+        this.fireAudio = new Sound('yanlis.mp3', Sound.MAIN_BUNDLE, (error) => {});
+        this.shoesAudio = new Sound('s6ayakkabi.mp3', Sound.MAIN_BUNDLE, (error) => {});
+        this.trashAudio = new Sound('s6cop.mp3', Sound.MAIN_BUNDLE, (error) => {});
+        this.chairAudio = new Sound('s6tabure.mp3', Sound.MAIN_BUNDLE, (error) => {});
+        
+        this.pageAudio = new Sound('sayfa6.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
             } else {
@@ -23,29 +19,32 @@ class Page6 extends Component {
             }
         });
     }
-    onPressLearnMore = () => {
+    goToHomePage = () => {
+        this.props.setPageNum(0)
     }
+
     componentWillUnmount(){
-        this.fireAudio.stop();
-        this.windAudio.stop();
-        this.pageAudio.stop()
+        this.fireAudio.release();
+        this.pageAudio.release()
     }
+    
     onPressTabure = ()=>{
-        this.fireAudio.play(); // have to put the call to play() in the onload callback
+        this.chairAudio.play(); // have to put the call to play() in the onload callback
     }
+
     onPressAyakkabi = ()=>{
-        this.windAudio.play(); // have to put the call to play() in the onload callback
+        this.shoesAudio.play(); // have to put the call to play() in the onload callback
     }
+    
     onPressCopKovasi = ()=>{
-        this.windAudio.play(); // have to put the call to play() in the onload callback
+        this.trashAudio.play(); // have to put the call to play() in the onload callback
     }
     
     render() {
-       
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/6sayfa/6sayfa_Taslak.png')}>
                 <View style={{ margin:10}}>
-                    <TouchableOpacity onPress={() => this.onPressLearnMore()}>
+                    <TouchableOpacity onPress={() => this.goToHomePage()}>
                         <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                     </TouchableOpacity>
                 </View>
@@ -69,18 +68,7 @@ class Page6 extends Component {
                   
                 </View>
 
-                <View style={styles.buttonContainer}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.prevPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/geri.png')}/>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 0, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.nextPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/ileri.png')}/>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <Footer Score = {this.props.Score} setPageNum={this.props.setPageNum} currentPage={this.props.currentPage} />
             </ImageBackground>
         )
     }

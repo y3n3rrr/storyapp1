@@ -4,6 +4,7 @@ import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TouchableHig
     Alert,
     BackHandler, Animated, Dimensions } from 'react-native'
 import Sound from 'react-native-sound';
+import Footer from '../Components/Footer';
 
 export class locationInfo {
     width;
@@ -40,10 +41,12 @@ class Page11 extends Component {
     }
 
     componentWillUnmount(){
-        this.pageAudio.stop()
+        this.pageAudio.release()
         this.pageAudioCikis.play()
     }
-    onPressLearnMore = () => {
+    
+    goToHomePage = () => {
+        this.props.setPageNum(0)
     }
 
 
@@ -126,7 +129,7 @@ class Page11 extends Component {
             <View style={styles.container} >
                 <ImageBackground style={ styles.container}  imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/11SayfaResim/11sayfa_taslak.png')}>
                 <View style={{ margin:10}}>
-                    <TouchableOpacity onPress={() => this.onPressLearnMore()}>
+                    <TouchableOpacity onPress={() => this.goToHomePage()}>
                         <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                     </TouchableOpacity>
                 </View>
@@ -139,18 +142,7 @@ class Page11 extends Component {
                     <Image style={this.state.showDraggable ? {height:0} : {}} source={require('../../assets/11SayfaResim/tabure_duzgun.png')} />
                  </View>
                  </View>
-                 <View style={styles.buttonContainer}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.prevPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/geri.png')}/>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 0, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.nextPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/ileri.png')}/>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                 <Footer Score = {this.props.Score} setPageNum={this.props.setPageNum} currentPage={this.props.currentPage} />
                 </ImageBackground>
             </View>
             

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity,TouchableHighlight, Button, Image, Animated, Dimensions } from 'react-native'
 import Sound from 'react-native-sound';
+import Footer from '../Components/Footer';
 
 class Page7 extends Component {
     constructor(props) {
         super(props)
-        this.fireAudio = new Sound('fire_audio.mp3', Sound.MAIN_BUNDLE, (error) => {
+        this.kosiAudio = new Sound('sayfa7_kosi_zorlanma.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
             } 
@@ -22,18 +23,19 @@ class Page7 extends Component {
             }
         });
     }
-    onPressLearnMore = () => {
+    goToHomePage = () => {
+        this.props.setPageNum(0)
     }
     componentWillUnmount(){
-        this.fireAudio.stop()
-        this.pageAudio.stop()
+        this.kosiAudio.release()
+        this.pageAudio.release()
     }
     onPressKosi = ()=>{
-        this.fireAudio.play();
+        this.kosiAudio.play();
         <Image source={require('../../assets/10SayfaResim/soru.gif')} />
         this.setState({showKosiImage:false, showKosiGif:true,})
         setTimeout(()=>{
-            this.fireAudio.stop();
+            this.kosiAudio.stop();
             this.setState({showKosiImage:true, showKosiGif:false,})
         }, 2000)
          // have to put the call to play() in the onload callback
@@ -43,7 +45,7 @@ class Page7 extends Component {
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/7sayfa/7sayfa_Taslak.png')}>
                 <View style={{ margin:10 }}>
-                    <TouchableOpacity onPress={() => this.onPressLearnMore()}>
+                    <TouchableOpacity onPress={() => this.goToHomePage()}>
                         <Image source={require('../../assets/1sayfa/1sayfa_resim/home.png')} />
                     </TouchableOpacity>
                 </View>
@@ -57,18 +59,7 @@ class Page7 extends Component {
                     </View>
                 </View>
 
-                <View style={styles.buttonContainer}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.prevPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/geri.png')}/>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 0, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.nextPage}>
-                            <Image source={require('../../assets/1sayfa/1sayfa_resim/ileri.png')}/>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <Footer Score = {this.props.Score} setPageNum={this.props.setPageNum} currentPage={this.props.currentPage} />
             </ImageBackground>
         )
     }

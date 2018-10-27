@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TouchableHighlight, Button, Image, Animated, Dimensions } from 'react-native'
 import Sound from 'react-native-sound';
+import Footer from '../Components/Footer';
+import Cuzdan from '../Components/Helpers'
 
 class Page2 extends Component {
     constructor(props) {
@@ -29,7 +31,7 @@ class Page2 extends Component {
             agacYarimGif3: false,
             agacKarsiz3: false,
         }
-
+        
         this.pageAudio = new Sound('sayfa2.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
@@ -37,11 +39,16 @@ class Page2 extends Component {
                 this.pageAudio.play(); // have to put the call to play() in the onload callback
             }
         });
+        this.hisirtiAudio = new Sound('hisirti.mp3', Sound.MAIN_BUNDLE, (error) => {});
+
     }
     componentWillUnmount() {
-        this.pageAudio.stop()
+        this.pageAudio.release()
     }
-    onPressLearnMore = () => {
+    goToHomePage = () => {
+        this.props.setPageNum(0)
+    }
+    componentDidMount() {
         this.setState({
             pofuImage: require('../../assets/2sayfa/ikinciSayfa_resim/new_PofuZiplama.gif')
         });
@@ -69,12 +76,10 @@ class Page2 extends Component {
             })
         }
             , 15000)
-
-    }
-    componentDidMount() {
-        this.onPressLearnMore();
     }
     onPressTree = (e) => {
+        this.props.addScore(Cuzdan.objPoints.tree)
+        this.hisirtiAudio.play();
         switch (e) {
             case 1:
             this.setState({ agacTamResim: false, agacTamGif:true });
@@ -107,7 +112,7 @@ class Page2 extends Component {
         return (
             <ImageBackground style={styles.container} imageStyle={{ resizeMode: 'stretch' }} source={require('../../assets/2sayfa/ikinciSayfa.png')}>
                 <View style={{ margin: 11 }}>
-                    <TouchableOpacity onPress={() => this.onPressLearnMore()}>
+                    <TouchableOpacity onPress={() => this.goToHomePage()}>
                         <Image
                             source={require('../../assets/1sayfa/1sayfa_resim/home.png')}
                         />
@@ -195,20 +200,8 @@ class Page2 extends Component {
                         }}
                     ></Animated.Image>
                 }
-                <View style={styles.buttonContainer}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.prevPage}><Image
-                            source={require('../../assets/1sayfa/1sayfa_resim/geri.png')}
-                        /></TouchableOpacity>
-                    </View>
 
-                    <View style={{ flex: 0, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={this.props.nextPage}>
-                            <Image
-                                source={require('../../assets/1sayfa/1sayfa_resim/ileri.png')}
-                            /></TouchableOpacity>
-                    </View>
-                </View>
+                <Footer Score = {this.props.Score} setPageNum={this.props.setPageNum} currentPage={this.props.currentPage} />
             </ImageBackground>
         )
     }
